@@ -24,7 +24,20 @@ jobs:
       - name: Checkout keyboard source
         uses: actions/checkout@v4
         with:
-          path: vial-qmk/keyboards/doio/kb16/rev2
+          path: keyboard_src
+
+      - name: Setup keyboard directory
+        run: |
+          mkdir -p vial-qmk/keyboards/doio/kb16/rev2
+          if [ -f keyboard_src/rules.mk ] || [ -f keyboard_src/info.json ]; then
+            cp -r keyboard_src/* vial-qmk/keyboards/doio/kb16/rev2/
+          elif [ -d keyboard_src/keyboards ]; then
+            cp -r keyboard_src/keyboards/* vial-qmk/keyboards/
+          else
+            cp -r keyboard_src/* vial-qmk/keyboards/doio/kb16/rev2/
+          fi
+          echo "=== Check directory structure ==="
+          ls -la vial-qmk/keyboards/doio/kb16/rev2
 
       - name: Build Firmware
         run: |
