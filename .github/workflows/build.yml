@@ -21,10 +21,10 @@ jobs:
           submodules: recursive
           path: vial-qmk
 
-      - name: Checkout keyboard source
+- name: Checkout keyboard source
         uses: actions/checkout@v4
         with:
-          path: vial-qmk/keyboards/doio/kb16
+          path: vial-qmk/keyboards/doio
 
       - name: Build Firmware
         run: |
